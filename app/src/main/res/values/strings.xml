@@ -1,0 +1,7 @@
+<resources>
+    <string name="app_name">WOTR</string>
+    <string name="map_key"> AIzaSyB_qsP8AOP_P0MdlPz-48TDaJYjTP3vbjo</string>
+    <string name="btnConfirm">Confirm</string>
+    <string name="btnClear">Clear Map</string>
+    <string name="btnCurrentLocation">My Location</string>
+</resources>
