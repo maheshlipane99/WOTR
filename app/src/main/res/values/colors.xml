@@ -3,4 +3,11 @@
     <color name="colorPrimary">#008577</color>
     <color name="colorPrimaryDark">#00574B</color>
     <color name="colorAccent">#D81B60</color>
+    <color name="colorBgHome">#B0EFF2F7</color>
+    <color name="colorDivider">#B6B5B5</color>
+    <color name="colorTextPrimary">#4D4C4C</color>
+    <color name="colorTextSecond">#868080</color>
+    <color name="common_border_color">#868080</color>
+    <color name="colorCheck">#3AC9B2</color>
+    <color name="colorButton">#2196F3</color>
 </resources>

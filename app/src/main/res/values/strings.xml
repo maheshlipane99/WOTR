@@ -1,7 +1,14 @@
 <resources>
     <string name="app_name">WOTR</string>
     <string name="map_key"> AIzaSyB_qsP8AOP_P0MdlPz-48TDaJYjTP3vbjo</string>
-    <string name="btnConfirm">Confirm</string>
-    <string name="btnClear">Clear Map</string>
-    <string name="btnCurrentLocation">My Location</string>
+    <string name="btnConfirm">पूर्ण झाले</string>
+    <string name="btnClear">साफ करा</string>
+    <string name="btnCurrentLocation">माझे स्थान</string>
+    <string name="textDate">Date</string>
+    <string name="textMonth">Month</string>
+    <string name="textYear">Year</string>
+    <string name="label1">पेरनी दिनांक/नियोजित पेरनी दिनांक</string>
+    <string name="label2">अपेक्षित पिकवाडीचा कलावधी</string>
+    <string name="textNext">पुढे</string>
+    <string name="textArea">क्षेत्र</string>
 </resources>

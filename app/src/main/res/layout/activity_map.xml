@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context=".MapActivity">
+    tools:context=".activities.MapActivity">
     <fragment
         android:id="@+id/autocomplete_fragment"
         android:layout_width="match_parent"
@@ -30,24 +30,34 @@
         android:layout_alignParentBottom="true"
         android:gravity="center"
         android:orientation="horizontal">
+
         <Button
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:id="@+id/btnConfirm"
-            android:text="@string/btnConfirm"
-            android:textAllCaps="false"/>
-        <Button
+            android:layout_margin="10dp"
+            android:background="@drawable/rounded_btn_no_padding"
+            android:textColor="@color/quantum_white_100"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:id="@+id/btnMyLocation"
             android:text="@string/btnCurrentLocation"
             android:textAllCaps="false"/>
         <Button
+            android:background="@drawable/rounded_btn_no_padding"
+            android:textColor="@color/quantum_white_100"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:id="@+id/btnClear"
             android:text="@string/btnClear"
             android:textAllCaps="false"/>
+        <Button
+            android:layout_margin="10dp"
+            android:background="@drawable/rounded_btn_no_padding"
+            android:textColor="@color/quantum_white_100"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/btnConfirm"
+            android:text="@string/btnConfirm"
+            android:textAllCaps="false"/>
     </LinearLayout>
+
 
 </RelativeLayout>
