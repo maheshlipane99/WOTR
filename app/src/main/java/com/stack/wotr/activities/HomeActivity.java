@@ -43,15 +43,16 @@ public class HomeActivity extends AppCompatActivity implements OnRecyclerViewCli
     private TextView textPeriod;
     IndicatorSeekBar seekPeriod;
     private Button btnNext;
-    String mMonth,mDate,mYear,mPeriod="60 Days";
+    String mMonth, mDate, mYear, mPeriod = "60 Days";
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
         setTitle("Home");
 
-        mYear=Calendar.getInstance().get(Calendar.YEAR)+"";
-        mDate=Calendar.getInstance().get(Calendar.DATE)+"";
+        mYear = Calendar.getInstance().get(Calendar.YEAR) + "";
+        mDate = Calendar.getInstance().get(Calendar.DATE) + "";
 
         textPeriod = findViewById(R.id.textPeriod);
         seekPeriod = findViewById(R.id.seekPeriod);
@@ -75,7 +76,7 @@ public class HomeActivity extends AppCompatActivity implements OnRecyclerViewCli
             @Override
             public void onSeeking(SeekParams seekParams) {
                 textPeriod.setText(seekParams.progress + " Days");
-                mPeriod=seekParams.progress + " Days";
+                mPeriod = seekParams.progress + " Days";
             }
 
             @Override
@@ -90,54 +91,57 @@ public class HomeActivity extends AppCompatActivity implements OnRecyclerViewCli
         btnNext.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Data mData=new Data(mDate,mMonth,mYear,mPeriod);
+                Data mData = new Data(mDate, mMonth, mYear, mPeriod);
                 Intent mIntent = new Intent(HomeActivity.this, MapActivity.class);
-                mIntent.putExtra("data",mData);
+                mIntent.putExtra("data", mData);
                 startActivity(mIntent);
             }
         });
-        initAdapter();
 
+        initDateAdapter();
+        initMonthAdapter();
+        initYearAdapter();
     }
 
 
-    private void initAdapter() {
-        month = getResources().getStringArray(R.array.months);
-        for (int i = month.length-1; i >=0 ; i--) {
-            Item item=new Item(month[i]);
-            if ((Calendar.getInstance().get(Calendar.MONTH))==i){
-                mMonth=item.getTitle();
-                item.setCheck(true);
-            }
-            mMonthAdapter.addItem(item);
-        }
-
-
-        for (int i = 31; i >= 1; i--) {
-            Item item=new Item(i + "");
-            if (Integer.parseInt(mDate)==i){
-                item.setCheck(true);
-            }
-            mDayAdapter.addItem(item);
-        }
-
-
+    private void initYearAdapter() {
         for (int i = 2030; i >= 2010; i--) {
-            Item item=new Item(i + "");
-            if (Integer.parseInt(mYear)==i){
+            Item item = new Item(i + "");
+            if (Integer.parseInt(mYear) == i) {
                 item.setCheck(true);
             }
             mYearAdapter.addItem(item);
         }
+        recyclerViewYear.scrollToPosition(mYearAdapter.getLastPosition()); //use to focus the item with index
+        mYearAdapter.notifyDataSetChanged();
+    }
 
+
+    private void initMonthAdapter() {
+        month = getResources().getStringArray(R.array.months);
+        for (int i = month.length - 1; i >= 0; i--) {
+            Item item = new Item(month[i]);
+            if ((Calendar.getInstance().get(Calendar.MONTH)) == i) {
+                mMonth = item.getTitle();
+                item.setCheck(true);
+            }
+            mMonthAdapter.addItem(item);
+        }
         recyclerViewMonth.scrollToPosition(mMonthAdapter.getLastPosition()); //use to focus the item with index
         mMonthAdapter.notifyDataSetChanged();
+    }
 
+    private void initDateAdapter() {
+        for (int i = 31; i >= 1; i--) {
+            Item item = new Item(i + "");
+            if (Integer.parseInt(mDate) == i) {
+                item.setCheck(true);
+            }
+            mDayAdapter.addItem(item);
+        }
         recyclerViewDate.scrollToPosition(mDayAdapter.getLastPosition()); //use to focus the item with index
         mDayAdapter.notifyDataSetChanged();
 
-        recyclerViewYear.scrollToPosition(mYearAdapter.getLastPosition()); //use to focus the item with index
-        mYearAdapter.notifyDataSetChanged();
     }
 
     @Override
@@ -150,7 +154,7 @@ public class HomeActivity extends AppCompatActivity implements OnRecyclerViewCli
                 mItemOld.setCheck(false);
                 mMonthAdapter.replace(mMonthAdapter.getLastPosition(), mItemOld);
                 mMonthAdapter.replace(position, mItemNew);
-                mMonth=mItemNew.getTitle();
+                mMonth = mItemNew.getTitle();
                 break;
             }
             case R.id.rootViewDate: {
@@ -161,7 +165,7 @@ public class HomeActivity extends AppCompatActivity implements OnRecyclerViewCli
                 mItemOld.setCheck(false);
                 mDayAdapter.replace(mDayAdapter.getLastPosition(), mItemOld);
                 mDayAdapter.replace(position, mItemNew);
-                mDate=mItemNew.getTitle();
+                mDate = mItemNew.getTitle();
                 break;
             }
             case R.id.rootViewYear: {
@@ -171,7 +175,7 @@ public class HomeActivity extends AppCompatActivity implements OnRecyclerViewCli
                 mItemOld.setCheck(false);
                 mYearAdapter.replace(mYearAdapter.getLastPosition(), mItemOld);
                 mYearAdapter.replace(position, mItemNew);
-                mYear=mItemNew.getTitle();
+                mYear = mItemNew.getTitle();
                 break;
             }
         }
