@@ -4,24 +4,24 @@ import android.os.Parcel;
 import android.os.Parcelable;
 
 public class Data implements Parcelable {
-    String mDate;
+    int mDate;
     String mMonth;
-    String mYear;
+    int mYear;
     String mPeriod;
     String mArea;
 
-    public Data(String mDate, String mMonth, String mYear, String mPeriod) {
+    public Data(int mDate, String mMonth, int mYear, String mPeriod) {
         this.mDate = mDate;
         this.mMonth = mMonth;
         this.mYear = mYear;
         this.mPeriod = mPeriod;
     }
 
-    public String getDate() {
+    public int getDate() {
         return mDate;
     }
 
-    public void setDate(String mDate) {
+    public void setDate(int mDate) {
         this.mDate = mDate;
     }
 
@@ -33,11 +33,11 @@ public class Data implements Parcelable {
         this.mMonth = mMonth;
     }
 
-    public String getYear() {
+    public int getYear() {
         return mYear;
     }
 
-    public void setYear(String mYear) {
+    public void setYear(int mYear) {
         this.mYear = mYear;
     }
 
@@ -57,6 +57,9 @@ public class Data implements Parcelable {
         this.mArea = mArea;
     }
 
+    public static Creator<Data> getCREATOR() {
+        return CREATOR;
+    }
 
     @Override
     public int describeContents() {
@@ -65,17 +68,20 @@ public class Data implements Parcelable {
 
     @Override
     public void writeToParcel(Parcel dest, int flags) {
-        dest.writeString(this.mDate);
+        dest.writeInt(this.mDate);
         dest.writeString(this.mMonth);
-        dest.writeString(this.mYear);
+        dest.writeInt(this.mYear);
         dest.writeString(this.mPeriod);
         dest.writeString(this.mArea);
     }
 
+    public Data() {
+    }
+
     protected Data(Parcel in) {
-        this.mDate = in.readString();
+        this.mDate = in.readInt();
         this.mMonth = in.readString();
-        this.mYear = in.readString();
+        this.mYear = in.readInt();
         this.mPeriod = in.readString();
         this.mArea = in.readString();
     }

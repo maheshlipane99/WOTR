@@ -49,21 +49,38 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
+import butterknife.BindView;
+import butterknife.ButterKnife;
+
 public class MapActivity extends FragmentActivity implements OnMapReadyCallback, View.OnClickListener {
     private static final String TAG = MapActivity.class.getSimpleName();
+
     private GoogleMap mMap;
     private static final int REQUEST_CODE = 101;
     Location currentLocation;
     FusedLocationProviderClient fusedLocationProviderClient;
     List<LatLng> mLatLng = new ArrayList<>();
-    private Button btnConfirm, btnMyLocation, btnClear;
+
+    @BindView(R.id.btnConfirm)
+    Button btnConfirm;
+
+    @BindView(R.id.btnMyLocation)
+    Button btnMyLocation;
+
+    @BindView(R.id.btnClear)
+    Button btnClear;
+
     boolean isDone;
     Data mData;
+
+    int mMaxMarker=4;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_map);
+        ButterKnife.bind(this);
+
         mData = getIntent().getParcelableExtra("data");
         Log.i(TAG, "onCreate: " + mData.getMonth());
 
@@ -74,9 +91,6 @@ public class MapActivity extends FragmentActivity implements OnMapReadyCallback,
     }
 
     private void initView() {
-        btnConfirm = findViewById(R.id.btnConfirm);
-        btnMyLocation = findViewById(R.id.btnMyLocation);
-        btnClear = findViewById(R.id.btnClear);
 
         btnConfirm.setOnClickListener(this);
         btnMyLocation.setOnClickListener(this);
@@ -164,6 +178,7 @@ public class MapActivity extends FragmentActivity implements OnMapReadyCallback,
     private void addPoint(LatLng point) {
         mLatLng.add(point);
         drawPolyline();
+
     }
 
     private String getArea() {
@@ -232,9 +247,6 @@ public class MapActivity extends FragmentActivity implements OnMapReadyCallback,
             isDone = true;
             Toast.makeText(this, "Size is : " + getArea() + " square meters", Toast.LENGTH_SHORT).show();
             mData.setArea(getArea() + " square meters");
-            Intent mIntent = new Intent(MapActivity.this, DataActivity.class);
-            mIntent.putExtra("data", mData);
-            startActivity(mIntent);
         } else {
             Toast.makeText(this, "Please select more than one point", Toast.LENGTH_SHORT).show();
         }
@@ -253,6 +265,9 @@ public class MapActivity extends FragmentActivity implements OnMapReadyCallback,
                 options.add(point);
             }
             mMap.addPolyline(options);
+            if (mLatLng.size()==mMaxMarker){
+                drawPolygon();
+            }
         } else {
             Toast.makeText(this, "Please select more than one point", Toast.LENGTH_SHORT).show();
         }
@@ -275,7 +290,14 @@ public class MapActivity extends FragmentActivity implements OnMapReadyCallback,
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.btnConfirm: {
-                drawPolygon();
+               if (isDone){
+                   Intent mIntent = new Intent(MapActivity.this, DataActivity.class);
+                   mIntent.putExtra("data", mData);
+                   startActivity(mIntent);
+               }else if (mLatLng.size()>2){
+                   drawPolygon();
+               }
+
                 break;
             }
             case R.id.btnMyLocation: {

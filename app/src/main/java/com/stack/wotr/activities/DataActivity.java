@@ -10,6 +10,8 @@ import com.stack.wotr.model.Data;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import butterknife.ButterKnife;
+
 public class DataActivity extends AppCompatActivity {
 
     Data mData;
@@ -19,6 +21,7 @@ public class DataActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_data);
+        ButterKnife.bind(this);
         setTitle("Collected Data");
 
         mData= getIntent().getParcelableExtra("data");
